@@ -17,13 +17,13 @@ app.use('/', function(req,res){
 	bind.toFile('employees.tpl', 
 	{
         //set up parameters
-        name:'tg',
+        
     }, 
     function(data) 
     {
         //write response
         res.writeHead(200, {'Content-Type': 'text/html'});
-        //res.end(data);
+        res.end(data);
     });
 });
 
