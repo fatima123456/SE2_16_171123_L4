@@ -20,8 +20,9 @@ function employee(Id,Name,Surname,Level,Salary){
 //list of employees
 var employees = [];
 
-//
+//variables for testing the searching feature
 employees[0]=new employee(123,'qwerty','asdf',1,123);
+employees[1]=new employee(123,'qwerty','asdf',1,123);
 
 var app = express();
 
