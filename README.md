@@ -15,3 +15,10 @@ As written above there are already present in the employees three employees.
 If you put one of their ids in the form, the respective employee will be deleted(to be sure about this you can search for it in the way that is written above). If there is no employee with the specified id, nothing will happen, because there is no requisite about this.
 As for the searching part, the form accepts every type of data for the same discourse.
 If you leave the form empty it will appear a page with the writing 'undefined form'.
+
+-TESTING INSERTING EMPLOYEE
+
+If you click on the button 'click to insert' a form appears where you can put the informations about the new employee.
+To test if it is actually inserted, you can search it.
+The form accepts all type of data for all its fields for the same discourse of above.
+If you leave the form(or just one of its fields) empty it will appear a page with the writing 'undefined form'.s
