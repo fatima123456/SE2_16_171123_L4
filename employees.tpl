@@ -6,6 +6,11 @@
 <body>
 
     <h1>EMPLOYEES MANAGER</h1>
+    
+    <p>
+        Insert a new Employee:  <button> click to insert</button>
+    </p>
+    
     <p>  Search employee by ID:</p>
     <form action="http://localhost:1337" method="post">
         <input name="idForSearching" />
