@@ -84,6 +84,9 @@ app.use('/', function(req,res){
                     res.end(data);
                 });
             }
+            else if(typeof req.body.insertedName !== 'undefined' && req.body.insertedName &&typeof req.body.insertedSurname !== 'undefined' && req.body.insertedSurname &&typeof req.body.insertedSalary !== 'undefined' && req.body.insertedSalary &&typeof req.body.insertedLevel !== 'undefined' && req.body.insertedLevel &&typeof req.body.insertedId !== 'undefined' && req.body.insertedId ){
+                insertEmployee(res,req,req.body.insertedName,req.body.insertedSurname,req.body.insertedSalary,req.body.insertedLevel,req.body.insertedId);
+            }
         }
         else{
             console.log('uns')
@@ -205,7 +208,28 @@ function deleteEmployee(res, req, idSearched){
  * @param Id of the element to show.
  *return nothing
  */
-function showForm(id){
-    console.log('yuvd');
-    document.getElementById(id).style.display = "block";
+function insertEmployee(res,req,insertedName,insertedSurname,insertedSalary,insertedLevel,insertedId){
+    var em =new employee();
+    em.id=insertedId;
+    em.name=insertedName;
+    em.surname=insertedSurname;
+    em.level=insertedLevel;
+    em.salary=insertedSalary;
+    
+    employees.push(em);
+    
+    bind.toFile('employees.tpl', 
+	   {
+            //set up parameters
+            //for now, no id has been searched, (and also found)
+            idSearchedButNotFound:false,
+            idTrovato:false,
+            insertRequested:false,
+        }, 
+        function(data) 
+        {
+            //write response
+            res.writeHead(200, {'Content-Type': 'text/html'});
+            res.end(data);
+        });
 }

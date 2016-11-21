@@ -28,10 +28,12 @@
         [:else ~ style="display:none" :]
           :)>
         Insert informations about the new employee: <br>
-        Name: <input> <br>
-        Surname: <input> <br>
-        Level: <input> <br>
-        Salary: <input> <br>
+        Id: <input name="insertedId"> <br>
+        Name: <input name="insertedName"> <br>
+        Surname: <input name="insertedSurname"> <br>
+        Level: <input name="insertedLevel"> <br>
+        Salary: <input name="insertedSalary"> <br>
+        <button onclick="submit()">send Form</button>
     </form>
     
     <form (:if[idTrovato] ~
