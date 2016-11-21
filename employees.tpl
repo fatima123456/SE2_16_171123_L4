@@ -12,6 +12,12 @@
         <button type="button" onclick="submit()">Send Form</button>
     </form>
     
+    <p>  Delete an employee by ID:</p>
+    <form action="http://localhost:1337" method="post">
+        <input name="idForDeleting" />
+        <button type="button" onclick="submit()">Send Form</button>
+    </form>
+    
     
     <form (:if[idTrovato] ~
         [:then ~ style="display:block":]
