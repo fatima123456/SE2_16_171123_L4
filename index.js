@@ -25,8 +25,9 @@ var opened=false;
 var employees = [];
 
 //variables for testing the searching feature
-employees[0]=new employee(123,'qwerty','asdf',1,123);
-employees[1]=new employee(1,'qwertyhgc','asdfdfdgh',1,123);
+employees[0]=new employee(345678,'Arianna','Giuliani',1,123);
+employees[1]=new employee(123456,'Mario','Rossi',1,1234);
+employees[2]=new employee(789012,'Diego','Bianchi',1,123);
 
 var app = express();
 
@@ -87,11 +88,12 @@ app.use('/', function(req,res){
             else if(typeof req.body.insertedName !== 'undefined' && req.body.insertedName &&typeof req.body.insertedSurname !== 'undefined' && req.body.insertedSurname &&typeof req.body.insertedSalary !== 'undefined' && req.body.insertedSalary &&typeof req.body.insertedLevel !== 'undefined' && req.body.insertedLevel &&typeof req.body.insertedId !== 'undefined' && req.body.insertedId ){
                 insertEmployee(res,req,req.body.insertedName,req.body.insertedSurname,req.body.insertedSalary,req.body.insertedLevel,req.body.insertedId);
             }
+            else{
+                console.log('uns')
+                res.end('undefined form');
+            }
         }
-        else{
-            console.log('uns')
-            res.end('undefined form');
-        }
+        
     }
     
     
