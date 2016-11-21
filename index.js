@@ -15,6 +15,7 @@ function employee(Id,Name,Surname,Level,Salary){
     this.surname=Surname;
     this.level=Level;
     this.salary=Salary;
+    
 }
 
 //list of employees
@@ -22,7 +23,7 @@ var employees = [];
 
 //variables for testing the searching feature
 employees[0]=new employee(123,'qwerty','asdf',1,123);
-employees[1]=new employee(123,'qwerty','asdf',1,123);
+employees[1]=new employee(1,'qwertyhgc','asdfdfdgh',1,123);
 
 var app = express();
 
@@ -57,6 +58,9 @@ app.use('/', function(req,res){
             //console.log('sono in body');
             if(typeof req.body.idForSearching !== 'indefined' && req.body.idForSearching){
                 searchEmployee(res,req,req.body.idForSearching);
+            }
+            else if(typeof req.body.idForDeleting !== 'indefined' && req.body.idForDeleting){
+                deleteEmployee(res,req,req.body.idForDeleting);
             }
         }
         else{
@@ -121,4 +125,55 @@ function searchEmployee(res, req, idSearched){
             res.end(data);
         });
     }
+}
+/**
+ *@brief Deletes the i-th element in the list of employee, and updates the list
+ *@param i index of the element that has to be deleted
+ *return nothing
+ */
+function deleteItem(i){
+    if(employees.length>0){
+    for(var j=i; j<employees.length-1; j++){
+        console.log(employees[j].id);
+        employees[j].id=employees[j+1].id;
+        employees[j].name=employees[j+1].name;
+        employees[j].surname=employees[j+1].surname;
+        employees[j].level=employees[j+1].level;
+        employees[j].salary=employees[j+1].salary;
+        console.log(employees[j].id);
+    }
+    employees.length-=1;
+    }
+}
+
+
+/**
+ *@brief It searches for an employee with the specified id passed as parameter, and then it deletes it.
+ *@param res,req,idSearched Response of the server, Request of the server, the id with witch search the employee to  delete
+ *return nothing
+ */
+function deleteEmployee(res, req, idSearched){
+    var i;
+    //loop for searching the index i, of the employee with the specified id
+    for(i=0 ; i<employees.length; i++){
+        if(employees[i].id==idSearched) {break;}
+    }
+    //if the index is less than the length of the list of the employyees, an employees has been found with the specified id
+    if(i<employees.length){
+        //delete the found employee
+        deleteItem(i);
+    }
+    bind.toFile('employees.tpl', 
+   {
+        //there is no need to show any further information
+        idSearchedButNotFound:false,
+        idTrovato:false,
+            
+    }, 
+    function(data) 
+    {
+        //write response
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.end(data);
+    });
 }
