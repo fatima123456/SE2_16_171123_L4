@@ -18,6 +18,9 @@ function employee(Id,Name,Surname,Level,Salary){
     
 }
 
+//
+var opened=false;
+
 //list of employees
 var employees = [];
 
@@ -45,6 +48,7 @@ app.use('/', function(req,res){
             //for now, no id has been searched, (and also found)
             idSearchedButNotFound:false,
             idTrovato:false,
+            insertRequested:false,
         }, 
         function(data) 
         {
@@ -54,13 +58,31 @@ app.use('/', function(req,res){
         });
     }
     else if(req.method.toLowerCase()=='post'){
+        console.log('sono in post');
         if(typeof req.body !== 'undefined' && req.body){
-            //console.log('sono in body');
-            if(typeof req.body.idForSearching !== 'indefined' && req.body.idForSearching){
+            console.log('sono in body');
+            if(typeof req.body.idForSearching !== 'undefined' && req.body.idForSearching){
                 searchEmployee(res,req,req.body.idForSearching);
             }
-            else if(typeof req.body.idForDeleting !== 'indefined' && req.body.idForDeleting){
+            else if(typeof req.body.idForDeleting !== 'undefined' && req.body.idForDeleting){
                 deleteEmployee(res,req,req.body.idForDeleting);
+            }
+            else if(typeof req.body.ins !== 'undefined'){
+                console.log('sono dentro');
+                bind.toFile('employees.tpl', 
+	           {
+                    //set up parameters
+                    //no id has been searched, (and also found)
+                    idSearchedButNotFound:false,
+                    idTrovato:false,
+                    insertRequested:true,
+                }, 
+                function(data) 
+                {
+                    //write response
+                    res.writeHead(200, {'Content-Type': 'text/html'});
+                    res.end(data);
+                });
             }
         }
         else{
@@ -176,4 +198,14 @@ function deleteEmployee(res, req, idSearched){
         res.writeHead(200, {'Content-Type': 'text/html'});
         res.end(data);
     });
+}
+
+/**
+ * @brief Sets the display of the html element to block.
+ * @param Id of the element to show.
+ *return nothing
+ */
+function showForm(id){
+    console.log('yuvd');
+    document.getElementById(id).style.display = "block";
 }

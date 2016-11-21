@@ -7,9 +7,9 @@
 
     <h1>EMPLOYEES MANAGER</h1>
     
-    <p>
-        Insert a new Employee:  <button> click to insert</button>
-    </p>
+    <div class="row">
+        <form action="http://localhost:1337" method="post">Insert a new Employee:<button onclick="submit()" name="ins"> click to insert</button></form>
+    </div>
     
     <p>  Search employee by ID:</p>
     <form action="http://localhost:1337" method="post">
@@ -23,6 +23,16 @@
         <button type="button" onclick="submit()">Send Form</button>
     </form>
     
+    <form id="inputForm" action="http://localhost:1337" method="post" (:if[insertRequested] ~
+        [:then ~ style="display:block":]
+        [:else ~ style="display:none" :]
+          :)>
+        Insert informations about the new employee: <br>
+        Name: <input> <br>
+        Surname: <input> <br>
+        Level: <input> <br>
+        Salary: <input> <br>
+    </form>
     
     <form (:if[idTrovato] ~
         [:then ~ style="display:block":]
